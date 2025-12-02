@@ -26,11 +26,13 @@ data['income'][np.random.randint(0, N_SAMPLES, 2)] = 150000  # Outliers
 df = pd.DataFrame(data)
 
 # Handle missing values by filling with median
-for column in df.select_dtypes(include=['float64', 'int64']).columns:
-    df[column].fillna(df[column].median(), inplace=True)
+numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median()) # type: ignore
 
 # Remove duplicates
-df.drop_duplicates(inplace=True)
+df = df.drop_duplicates()
+
+df['income_log'] = np.log1p(df['income'])
 
 scaler = StandardScaler()
 numeric_features = df.select_dtypes(include=['float64', 'int64']).columns
@@ -42,9 +44,6 @@ df = pd.get_dummies(df, drop_first=True)
 # Detect and remove outliers using Z-score
 z_scores = np.abs(stats.zscore(df.select_dtypes(include=['float64', 'int64']))) # type: ignore
 df = df[(z_scores < 3).all(axis=1)]
-
-# Apply log transformation to skewed data
-df['income_log'] = np.log1p(df['income'])
 
 X = df.drop('target', axis=1)
 y = df['target']
