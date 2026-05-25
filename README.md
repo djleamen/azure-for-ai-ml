@@ -6,8 +6,6 @@ Practice activities from the **Microsoft Azure for AI and Machine Learning** cou
 
 ```
 azure-for-ai-ml/
-├── .azureml/
-│   └── config.json                  # Azure ML workspace configuration
 ├── 1. data prep and model training/
 │   └── preprocessing.py             # Data cleaning, scaling, outlier handling
 ├── 2. model deployment/
@@ -17,9 +15,6 @@ azure-for-ai-ml/
 │   ├── automatedalerts.py           # Alerting and automated remediation
 │   ├── diagnostictools.py           # Diagnostic and monitoring tooling
 │   └── troubleshootsample.py        # Troubleshoot a sample ML pipeline
-├── customer_data.csv                # Sample dataset
-├── model_performance_logs.log       # Sample inference logs
-└── pipeline_logs.log                # Sample pipeline logs
 ```
 
 ## Modules
